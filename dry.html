@@ -51,8 +51,17 @@
             <div class="space-y-8">
                 <!-- WET Example -->
                 <div>
-                    <h3 class="text-lg font-semibold text-red-400 mb-2">WET Approach (Repetitive)</h3>
-                    <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python"><span class="text-slate-500"># WET: Repetitive file writing logic</span>
+                    <div onclick="toggleCodeBlock('wet-code')" class="code-title-container cursor-pointer flex items-center justify-between mb-2 p-2 rounded-lg hover:bg-slate-800/30 transition-all duration-200">
+                        <h3 class="text-lg font-semibold text-red-400">WET Approach (Repetitive)</h3>
+                        <div class="flex items-center space-x-2 text-slate-400">
+                            <span id="wet-code-text" class="text-sm">Show Code</span>
+                            <svg id="wet-code-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="wet-code" class="code-block-container overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0; opacity: 0;">
+                        <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python"><span class="text-slate-500"># WET: Repetitive file writing logic</span>
 <span class="text-purple-400">import</span> json
 
 <span class="text-purple-400">def</span> <span class="text-cyan-400">save_user_as_json</span>(<span class="text-orange-400">user, filename</span>):
@@ -66,11 +75,21 @@
         content = <span class="text-green-400">f"Name: {user['name']}\nEmail: {user['email']}"</span>
         f.write(content)
     <span class="text-cyan-400">print</span>(<span class="text-green-400">f"Saved {filename}!"</span>)</code></pre>
+                    </div>
                 </div>
                 <!-- DRY Example -->
                 <div>
-                    <h3 class="text-lg font-semibold text-green-400 mb-2">DRY Approach (Reusable)</h3>
-                    <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python"><span class="text-slate-500"># DRY: Abstracted file writing logic</span>
+                    <div onclick="toggleCodeBlock('dry-code')" class="code-title-container cursor-pointer flex items-center justify-between mb-2 p-2 rounded-lg hover:bg-slate-800/30 transition-all duration-200">
+                        <h3 class="text-lg font-semibold text-green-400">DRY Approach (Reusable)</h3>
+                        <div class="flex items-center space-x-2 text-slate-400">
+                            <span id="dry-code-text" class="text-sm">Show Code</span>
+                            <svg id="dry-code-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="dry-code" class="code-block-container overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0; opacity: 0;">
+                        <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python"><span class="text-slate-500"># DRY: Abstracted file writing logic</span>
 <span class="text-purple-400">import</span> json
 
 <span class="text-purple-400">def</span> <span class="text-cyan-400">save_to_file</span>(<span class="text-orange-400">content, filename</span>):
@@ -85,6 +104,7 @@
 <span class="text-purple-400">def</span> <span class="text-cyan-400">save_user_as_txt</span>(<span class="text-orange-400">user, filename</span>):
     content = <span class="text-green-400">f"Name: {user['name']}\nEmail: {user['email']}"</span>
     <span class="text-cyan-400">save_to_file</span>(content, filename)</code></pre>
+                    </div>
                 </div>
             </div>
         </div>
@@ -110,6 +130,28 @@
             </a>
         </div>
     </div>
+
+    <script>
+        function toggleCodeBlock(blockId) {
+            const block = document.getElementById(blockId);
+            const textElement = document.getElementById(blockId + '-text');
+            const iconElement = document.getElementById(blockId + '-icon');
+            
+            if (block.style.maxHeight === '0px' || block.style.maxHeight === '') {
+                // Show the code block
+                block.style.maxHeight = block.scrollHeight + 'px';
+                block.style.opacity = '1';
+                textElement.textContent = 'Hide Code';
+                iconElement.style.transform = 'rotate(180deg)';
+            } else {
+                // Hide the code block
+                block.style.maxHeight = '0px';
+                block.style.opacity = '0';
+                textElement.textContent = 'Show Code';
+                iconElement.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
 
 </body>
 </html>

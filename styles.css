@@ -489,3 +489,86 @@ body {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
+
+/* Collapsible code block styles */
+.hidden {
+    display: none;
+}
+
+.code-title-container {
+    user-select: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.code-title-container:hover {
+    background-color: rgba(30, 41, 59, 0.3);
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.code-block-container {
+    transition: all 0.3s ease-in-out;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.code-block-container.expanded {
+    max-height: 1000px;
+    opacity: 1;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.space-x-2 > * + * {
+    margin-left: 0.5rem;
+}
+
+.w-4 {
+    width: 1rem;
+}
+
+.h-4 {
+    height: 1rem;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.p-2 {
+    padding: 0.5rem;
+}
+
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+
+.duration-200 {
+    transition-duration: 200ms;
+}
+
+.duration-300 {
+    transition-duration: 300ms;
+}
+
+.ease-in-out {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.transition-transform {
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}

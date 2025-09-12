@@ -41,8 +41,17 @@
         <div class="w-full lg:w-3/5 bg-slate-900/70 p-8 md:p-16 flex flex-col justify-center">
             <div class="space-y-8">
                 <div>
-                    <h3 class="text-lg font-semibold text-red-400 mb-2">Speculative Approach</h3>
-                    <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python"><span class="text-slate-500"># YAGNI violation: Building a generic writer for future needs</span>
+                    <div onclick="toggleCodeBlock('speculative-code')" class="code-title-container cursor-pointer flex items-center justify-between mb-2 p-2 rounded-lg hover:bg-slate-800/30 transition-all duration-200">
+                        <h3 class="text-lg font-semibold text-red-400">Speculative Approach</h3>
+                        <div class="flex items-center space-x-2 text-slate-400">
+                            <span id="speculative-code-text" class="text-sm">Show Code</span>
+                            <svg id="speculative-code-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="speculative-code" class="code-block-container overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0; opacity: 0;">
+                        <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python"><span class="text-slate-500"># YAGNI violation: Building a generic writer for future needs</span>
 <span class="text-purple-400">import</span> json
 
 <span class="text-purple-400">class</span> <span class="text-yellow-400">GenericFileWriter</span>:
@@ -63,10 +72,20 @@
         <span class="text-purple-400">elif</span> <span class="text-orange-400">self</span>.format == <span class="text-green-400">'csv'</span>:
             <span class="text-slate-500"># Or this</span>
             <span class="text-purple-400">pass</span></code></pre>
+                    </div>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold text-green-400 mb-2">YAGNI Approach (Focused)</h3>
-                    <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python"><span class="text-slate-500"># YAGNI: Implement only what's necessary now</span>
+                    <div onclick="toggleCodeBlock('yagni-code')" class="code-title-container cursor-pointer flex items-center justify-between mb-2 p-2 rounded-lg hover:bg-slate-800/30 transition-all duration-200">
+                        <h3 class="text-lg font-semibold text-green-400">YAGNI Approach (Focused)</h3>
+                        <div class="flex items-center space-x-2 text-slate-400">
+                            <span id="yagni-code-text" class="text-sm">Show Code</span>
+                            <svg id="yagni-code-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="yagni-code" class="code-block-container overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0; opacity: 0;">
+                        <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python"><span class="text-slate-500"># YAGNI: Implement only what's necessary now</span>
 <span class="text-purple-400">import</span> json
 
 <span class="text-purple-400">def</span> <span class="text-cyan-400">write_json_file</span>(<span class="text-orange-400">filename, data</span>):
@@ -81,6 +100,7 @@
 
 <span class="text-slate-500"># Add an XML writer only when a feature</span>
 <span class="text-slate-500"># explicitly requires it.</span></code></pre>
+                    </div>
                 </div>
             </div>
         </div>
@@ -106,6 +126,28 @@
             </span>
         </div>
     </div>
+
+    <script>
+        function toggleCodeBlock(blockId) {
+            const block = document.getElementById(blockId);
+            const textElement = document.getElementById(blockId + '-text');
+            const iconElement = document.getElementById(blockId + '-icon');
+            
+            if (block.style.maxHeight === '0px' || block.style.maxHeight === '') {
+                // Show the code block
+                block.style.maxHeight = block.scrollHeight + 'px';
+                block.style.opacity = '1';
+                textElement.textContent = 'Hide Code';
+                iconElement.style.transform = 'rotate(180deg)';
+            } else {
+                // Hide the code block
+                block.style.maxHeight = '0px';
+                block.style.opacity = '0';
+                textElement.textContent = 'Show Code';
+                iconElement.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
 
 </body>
 </html>

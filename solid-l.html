@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLID - LSP</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="text-white min-h-screen">
+
+    <div class="relative min-h-screen w-full flex flex-col lg:flex-row overflow-hidden">
+        
+        <!-- Left Panel: Content -->
+        <div class="w-full lg:w-2/5 flex flex-col justify-center p-8 md:p-16">
+            <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-slate-700">SO<span class="text-slate-300">L</span>ID</h1>
+            <p class="text-2xl md:text-3xl text-slate-400 mt-1">Liskov Substitution Principle</p>
+            <div class="w-24 h-1 bg-cyan-500 my-8"></div>
+            <p class="text-lg text-slate-300 max-w-md">
+                Subtypes must be substitutable for their base types without altering the correctness of the program.
+            </p>
+            <ul class="mt-8 space-y-5">
+                <li class="flex items-center space-x-4">
+                    <div class="flex-shrink-0 text-cyan-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                    <p class="text-slate-300"><strong>Predictable Behavior:</strong> Ensures derived classes don't break assumptions.</p>
+                </li>
+                <li class="flex items-center space-x-4">
+                     <div class="flex-shrink-0 text-yellow-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 16v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg></div>
+                    <p class="text-slate-300"><strong>Safer Inheritance:</strong> Encourages true "is-a" relationships.</p>
+                </li>
+                <li class="flex items-center space-x-4">
+                     <div class="flex-shrink-0 text-purple-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2-5.5 5.5v3h3v-3h5v3h3v-3L12 2z"></path><path d="M12 22l5.5-5.5v-3h-3v3h-5v-3h-3v3L12 22z"></path></svg></div>
+                    <p class="text-slate-300"><strong>Reduced Side Effects:</strong> Makes swapping objects safe and reliable.</p>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Right Panel: Comparisons -->
+        <div class="w-full lg:w-3/5 bg-slate-900/70 p-8 md:p-16 flex flex-col justify-center">
+            <div class="space-y-8">
+                <div>
+                    <div onclick="toggleCodeBlock('before-lsp')" class="code-title-container cursor-pointer flex items-center justify-between mb-2 p-2 rounded-lg hover:bg-slate-800/50 transition-all duration-200">
+                        <h3 class="text-lg font-semibold text-red-400">Violation of LSP</h3>
+                        <div class="flex items-center space-x-2 text-slate-400">
+                            <span id="before-lsp-text" class="text-sm">Show Code</span>
+                            <svg id="before-lsp-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="before-lsp" class="code-block-container overflow-hidden" style="max-height: 0; opacity: 0;">
+                        <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python">
+<span class="text-slate-500"># A Square is not substitutable for a Rectangle</span>
+<span class="text-purple-400">class</span> <span class="text-yellow-400">Rectangle</span>:
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">__init__</span>(<span class="text-orange-400">self, w, h</span>): <span class="text-orange-400">self</span>._w, <span class="text-orange-400">self</span>._h = w, h
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">set_width</span>(<span class="text-orange-400">self, w</span>): <span class="text-orange-400">self</span>._w = w
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">set_height</span>(<span class="text-orange-400">self, h</span>): <span class="text-orange-400">self</span>._h = h
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">get_area</span>(<span class="text-orange-400">self</span>): <span class="text-purple-400">return</span> <span class="text-orange-400">self</span>._w * <span class="text-orange-400">self</span>._h
+
+<span class="text-purple-400">class</span> <span class="text-yellow-400">Square</span>(<span class="text-yellow-400">Rectangle</span>):
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">set_width</span>(<span class="text-orange-400">self, w</span>): <span class="text-orange-400">self</span>._w = <span class="text-orange-400">self</span>._h = w
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">set_height</span>(<span class="text-orange-400">self, h</span>): <span class="text-orange-400">self</span>._w = <span class="text-orange-400">self</span>._h = h
+
+<span class="text-slate-500"># This function now has unexpected behavior with a Square</span>
+<span class="text-purple-400">def</span> <span class="text-cyan-400">test_area</span>(<span class="text-orange-400">rect</span>):
+    rect.<span class="text-cyan-400">set_width</span>(5)
+    rect.<span class="text-cyan-400">set_height</span>(4)
+    <span class="text-cyan-400">print</span>(<span class="text-green-400">f'Expected 20, got: </span>{rect.<span class="text-cyan-400">get_area</span>()}<span class="text-green-400">'</span>)
+
+<span class="text-cyan-400">test_area</span>(<span class="text-cyan-400">Square</span>(0, 0)) <span class="text-slate-500"># Prints "Expected 20, got: 16"</span>
+</code></pre>
+                    </div>
+                </div>
+                <div>
+                    <div onclick="toggleCodeBlock('after-lsp')" class="code-title-container cursor-pointer flex items-center justify-between mb-2 p-2 rounded-lg hover:bg-slate-800/50 transition-all duration-200">
+                        <h3 class="text-lg font-semibold text-green-400">Adhering to LSP</h3>
+                        <div class="flex items-center space-x-2 text-slate-400">
+                            <span id="after-lsp-text" class="text-sm">Show Code</span>
+                            <svg id="after-lsp-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="after-lsp" class="code-block-container overflow-hidden" style="max-height: 0; opacity: 0;">
+                        <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python">
+<span class="text-slate-500"># A Shape hierarchy where all subtypes are substitutable</span>
+<span class="text-purple-400">from</span> abc <span class="text-purple-400">import</span> ABC, abstractmethod
+
+<span class="text-purple-400">class</span> <span class="text-yellow-400">Shape</span>(ABC):
+    @abstractmethod
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">get_area</span>(<span class="text-orange-400">self</span>): <span class="text-purple-400">pass</span>
+
+<span class="text-purple-400">class</span> <span class="text-yellow-400">Rectangle</span>(<span class="text-yellow-400">Shape</span>):
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">__init__</span>(<span class="text-orange-400">self, w, h</span>): <span class="text-orange-400">self</span>.w, <span class="text-orange-400">self</span>.h = w, h
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">get_area</span>(<span class="text-orange-400">self</span>): <span class="text-purple-400">return</span> <span class="text-orange-400">self</span>.w * <span class="text-orange-400">self</span>.h
+
+<span class="text-purple-400">class</span> <span class="text-yellow-400">Square</span>(<span class="text-yellow-400">Shape</span>):
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">__init__</span>(<span class="text-orange-400">self, side</span>): <span class="text-orange-400">self</span>.side = side
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">get_area</span>(<span class="text-orange-400">self</span>): <span class="text-purple-400">return</span> <span class="text-orange-400">self</span>.side ** 2
+
+<span class="text-slate-500"># Code now works predictably for any Shape</span>
+shapes = [<span class="text-cyan-400">Rectangle</span>(5, 4), <span class="text-cyan-400">Square</span>(5)]
+<span class="text-purple-400">for</span> shape <span class="text-purple-400">in</span> shapes:
+    <span class="text-cyan-400">print</span>(<span class="text-green-400">f'Area: </span>{shape.<span class="text-cyan-400">get_area</span>()}<span class="text-green-400">'</span>)
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subtle Navigation Controls -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center space-x-8 z-10">
+            <!-- Prev button -->
+            <a href="solid-o.html" class="text-slate-400 hover:text-white transition-colors" aria-label="Previous slide">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+            </a>
+            
+            <!-- Page dots -->
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to title page"></a>
+                <a href="dry.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to DRY slide"></a>
+                <a href="kiss.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to KISS slide"></a>
+                <a href="yagni.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to YAGNI slide"></a>
+                <a href="cicd.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to CI/CD slide"></a>
+                <a href="tdd.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to TDD slide"></a>
+                <a href="oop.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to OOP slide"></a>
+                <a href="solid-s.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to SRP slide"></a>
+                <a href="solid-o.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to OCP slide"></a>
+                <a href="solid-l.html" class="block w-3 h-3 bg-white rounded-full" aria-label="Go to LSP slide" aria-current="page"></a>
+                <a href="solid-i.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to ISP slide"></a>
+            </div>
+
+            <!-- Next button (loops back to start) -->
+            <a href="solid-i.html" class="text-slate-400 hover:text-white transition-colors" aria-label="Next slide">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function toggleCodeBlock(blockId) {
+            const block = document.getElementById(blockId);
+            const textElement = document.getElementById(blockId + '-text');
+            const iconElement = document.getElementById(blockId + '-icon');
+            
+            if (block.style.maxHeight === '0px' || !block.style.maxHeight) {
+                block.style.maxHeight = block.scrollHeight + 'px';
+                block.style.opacity = '1';
+                textElement.textContent = 'Hide Code';
+                iconElement.style.transform = 'rotate(180deg)';
+            } else {
+                block.style.maxHeight = '0px';
+                block.style.opacity = '0';
+                textElement.textContent = 'Show Code';
+                iconElement.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MVP Pattern</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="text-white min-h-screen">
+
+    <div class="relative min-h-screen w-full flex flex-col lg:flex-row overflow-hidden">
+        
+        <!-- Left Panel: Content -->
+        <div class="w-full lg:w-2/5 flex flex-col justify-center p-8 md:p-16">
+            <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-white">MVP</h1>
+            <p class="text-2xl md:text-3xl text-slate-400 mt-1">Model-View-Presenter</p>
+            <div class="w-24 h-1 bg-cyan-500 my-8"></div>
+            <p class="text-lg text-slate-300 max-w-md">
+                An architectural pattern that separates an application's logic into three interconnected components, improving modularity and testability.
+            </p>
+            <ul class="mt-8 space-y-5">
+                <li class="flex items-center space-x-4">
+                    <div class="flex-shrink-0 text-cyan-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div>
+                    <p class="text-slate-300"><strong>Separation of Concerns:</strong> The View is passive and all logic is in the Presenter.</p>
+                </li>
+                <li class="flex items-center space-x-4">
+                     <div class="flex-shrink-0 text-yellow-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                    <p class="text-slate-300"><strong>High Testability:</strong> The Presenter is decoupled from the UI, making it easy to unit test.</p>
+                </li>
+                <li class="flex items-center space-x-4">
+                     <div class="flex-shrink-0 text-purple-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.1l4 4-4 4"/><path d="M3 12.6V16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3.6"/><path d="M7 21.9l-4-4 4-4"/><path d="M21 11.4V8a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3.4"/></svg></div>
+                    <p class="text-slate-300"><strong>Improved Reusability:</strong> Swap out the View with minimal changes to the Presenter.</p>
+                </li>
+            </ul>
+             <div class="mt-8 pt-8 border-t border-slate-800">
+                <p class="text-sm text-slate-500">
+                    <strong>Note:</strong> While similar, <strong>MVC</strong> (Model-View-Controller) has the Controller handle input, but the View can still directly access the Model. In <strong>MVVM</strong> (Model-View-ViewModel), the ViewModel exposes data streams that the View binds to.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Right Panel: Comparisons -->
+        <div class="w-full lg:w-3/5 bg-slate-900/70 p-8 md:p-16 flex flex-col justify-center">
+            <div class="space-y-8">
+                <div>
+                    <div onclick="toggleCodeBlock('before-mvp')" class="code-title-container cursor-pointer flex items-center justify-between mb-2 p-2 rounded-lg hover:bg-slate-800/50 transition-all duration-200">
+                        <h3 class="text-lg font-semibold text-red-400">Tightly-Coupled Code</h3>
+                        <div class="flex items-center space-x-2 text-slate-400">
+                            <span id="before-mvp-text" class="text-sm">Show Code</span>
+                            <svg id="before-mvp-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="before-mvp" class="code-block-container overflow-hidden" style="max-height: 0; opacity: 0;">
+                        <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python">
+<span class="text-slate-500"># A simple UI where all logic is mixed in the View.</span>
+<span class="text-slate-500"># (Conceptual example, doesn't require a UI library)</span>
+<span class="text-purple-400">class</span> <span class="text-yellow-400">CounterAppView</span>:
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">__init__</span>(<span class="text-orange-400">self</span>):
+        <span class="text-orange-400">self</span>.count = 0  <span class="text-slate-500"># Data logic</span>
+        <span class="text-orange-400">self</span>.display_label = <span class="text-green-400">""</span> <span class="text-slate-500"># UI state</span>
+
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">_update_display</span>(<span class="text-orange-400">self</span>):
+        <span class="text-orange-400">self</span>.display_label = <span class="text-green-400">f"Count: </span>{<span class="text-orange-400">self</span>.count}<span class="text-green-400">"</span>
+        <span class="text-cyan-400">print</span>(<span class="text-green-400">f"UI Updated: </span>{<span class="text-orange-400">self</span>.display_label}<span class="text-green-400">"</span>)
+
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">on_increment_button_click</span>(<span class="text-orange-400">self</span>):
+        <span class="text-slate-500"># Presentation logic mixed with data logic</span>
+        <span class="text-orange-400">self</span>.count += 1
+        <span class="text-orange-400">self</span>.<span class="text-cyan-400">_update_display</span>()
+
+<span class="text-slate-500"># Hard to test the logic without creating the UI.</span>
+app = <span class="text-cyan-400">CounterAppView</span>()
+app.<span class="text-cyan-400">on_increment_button_click</span>()
+</code></pre>
+                    </div>
+                </div>
+                <div>
+                    <div onclick="toggleCodeBlock('after-mvp')" class="code-title-container cursor-pointer flex items-center justify-between mb-2 p-2 rounded-lg hover:bg-slate-800/50 transition-all duration-200">
+                        <h3 class="text-lg font-semibold text-green-400">MVP Pattern</h3>
+                        <div class="flex items-center space-x-2 text-slate-400">
+                            <span id="after-mvp-text" class="text-sm">Show Code</span>
+                            <svg id="after-mvp-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="after-mvp" class="code-block-container overflow-hidden" style="max-height: 0; opacity: 0;">
+                        <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python">
+<span class="text-purple-400">class</span> <span class="text-yellow-400">CounterModel</span>:
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">__init__</span>(<span class="text-orange-400">self</span>): <span class="text-orange-400">self</span>.count = 0
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">increment</span>(<span class="text-orange-400">self</span>): <span class="text-orange-400">self</span>.count += 1
+
+<span class="text-purple-400">class</span> <span class="text-yellow-400">CounterView</span>: <span class="text-slate-500"># The passive View</span>
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">update_display</span>(<span class="text-orange-400">self, text</span>): <span class="text-cyan-400">print</span>(<span class="text-green-400">f"UI Updated: </span>{text}<span class="text-green-400">"</span>)
+
+<span class="text-purple-400">class</span> <span class="text-yellow-400">CounterPresenter</span>: <span class="text-slate-500"># The logic hub</span>
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">__init__</span>(<span class="text-orange-400">self, model, view</span>):
+        <span class="text-orange-400">self</span>.model, <span class="text-orange-400">self</span>.view = model, view
+
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">on_increment</span>(<span class="text-orange-400">self</span>):
+        <span class="text-orange-400">self</span>.model.<span class="text-cyan-400">increment</span>()
+        new_text = <span class="text-green-400">f"Count: </span>{<span class="text-orange-400">self</span>.model.count}<span class="text-green-400">"</span>
+        <span class="text-orange-400">self</span>.view.<span class="text-cyan-400">update_display</span>(new_text)
+
+<span class="text-slate-500"># Easily testable and well-structured.</span>
+presenter = <span class="text-cyan-400">CounterPresenter</span>(<span class="text-cyan-400">CounterModel</span>(), <span class="text-cyan-400">CounterView</span>())
+presenter.<span class="text-cyan-400">on_increment</span>()
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subtle Navigation Controls -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center space-x-8 z-10">
+            <!-- Prev button -->
+            <a href="solid-d.html" class="text-slate-400 hover:text-white transition-colors" aria-label="Previous slide">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+            </a>
+            
+            <!-- Page dots -->
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to title page"></a>
+                <a href="dry.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to DRY slide"></a>
+                <a href="kiss.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to KISS slide"></a>
+                <a href="yagni.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to YAGNI slide"></a>
+                <a href="cicd.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to CI/CD slide"></a>
+                <a href="tdd.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to TDD slide"></a>
+                <a href="oop.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to OOP slide"></a>
+                <a href="solid-s.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to SRP slide"></a>
+                <a href="solid-o.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to OCP slide"></a>
+                <a href="solid-l.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to LSP slide"></a>
+                <a href="solid-i.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to ISP slide"></a>
+                <a href="solid-d.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to DIP slide"></a>
+                <a href="mvp.html" class="block w-3 h-3 bg-white rounded-full" aria-label="Go to MVP slide" aria-current="page"></a>
+            </div>
+
+            <!-- Next button (loops back to start) -->
+            <a href="dx.html" class="text-slate-400 hover:text-white transition-colors" aria-label="Next slide">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function toggleCodeBlock(blockId) {
+            const block = document.getElementById(blockId);
+            const textElement = document.getElementById(blockId + '-text');
+            const iconElement = document.getElementById(blockId + '-icon');
+            
+            if (block.style.maxHeight === '0px' || !block.style.maxHeight) {
+                block.style.maxHeight = block.scrollHeight + 'px';
+                block.style.opacity = '1';
+                textElement.textContent = 'Hide Code';
+                iconElement.style.transform = 'rotate(180deg)';
+            } else {
+                block.style.maxHeight = '0px';
+                block.style.opacity = '0';
+                textElement.textContent = 'Show Code';
+                iconElement.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
+
+</body>
+</html>

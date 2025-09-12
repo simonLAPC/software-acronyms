@@ -1,0 +1,5 @@
+{
+  "name": "Software Acronyms Presentation",
+  "description": "An interactive presentation explaining common software development acronyms like DRY, KISS, and YAGNI with clear descriptions and code examples.",
+  "requestFramePermissions": []
+}

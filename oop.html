@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOP</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="text-white min-h-screen">
+
+    <div class="relative min-h-screen w-full flex flex-col lg:flex-row overflow-hidden">
+        
+        <!-- Left Panel: Content -->
+        <div class="w-full lg:w-2/5 flex flex-col justify-center p-8 md:p-16">
+            <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-white">OOP</h1>
+            <p class="text-2xl md:text-3xl text-slate-400 mt-1">Object-Oriented Programming</p>
+            <div class="w-24 h-1 bg-cyan-500 my-8"></div>
+            <p class="text-lg text-slate-300 max-w-md">
+                A programming paradigm based on "objects", which bundle related data and behaviors. It helps structure programs into reusable, modular components.
+            </p>
+            <ul class="mt-8 space-y-5">
+                <li class="flex items-center space-x-4">
+                    <div class="flex-shrink-0 text-cyan-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
+                    <p class="text-slate-300"><strong>Encapsulation:</strong> Bundles data and methods together.</p>
+                </li>
+                <li class="flex items-center space-x-4">
+                     <div class="flex-shrink-0 text-yellow-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-8m0 0V4m0 8h8m-8 0H4"></path></svg></div>
+                    <p class="text-slate-300"><strong>Inheritance:</strong> Enables code reuse and extension.</p>
+                </li>
+                <li class="flex items-center space-x-4">
+                     <div class="flex-shrink-0 text-purple-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 7-7 7-7-7 7-7z"></path><path d="M2 12l7 7-7 7-7-7 7-7z"></path></svg></div>
+                    <p class="text-slate-300"><strong>Polymorphism:</strong> Allows objects to share interfaces.</p>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Right Panel: Comparisons -->
+        <div class="w-full lg:w-3/5 bg-slate-900/70 p-8 md:p-16 flex flex-col justify-center">
+            <div class="space-y-8">
+                <div>
+                    <div onclick="toggleCodeBlock('before-oop')" class="code-title-container cursor-pointer flex items-center justify-between mb-2 p-2 rounded-lg hover:bg-slate-800/50 transition-all duration-200">
+                        <h3 class="text-lg font-semibold text-red-400">Without OOP (Procedural)</h3>
+                        <div class="flex items-center space-x-2 text-slate-400">
+                            <span id="before-oop-text" class="text-sm">Show Code</span>
+                            <svg id="before-oop-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="before-oop" class="code-block-container overflow-hidden" style="max-height: 0; opacity: 0;">
+                        <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python">
+<span class="text-slate-500"># Hard to maintain and extend</span>
+<span class="text-purple-400">def</span> <span class="text-cyan-400">handle_enemy_attack</span>(<span class="text-orange-400">enemy_type, health</span>):
+    <span class="text-purple-400">if</span> enemy_type == <span class="text-green-400">'goblin'</span>:
+        <span class="text-cyan-400">print</span>(<span class="text-green-400">'The goblin attacks with its rusty dagger!'</span>)
+        health -= 5
+    <span class="text-purple-400">elif</span> enemy_type == <span class="text-green-400">'dragon'</span>:
+        <span class="text-cyan-400">print</span>(<span class="text-green-400">'The dragon breathes a torrent of fire!'</span>)
+        health -= 25
+    <span class="text-purple-400">elif</span> enemy_type == <span class="text-green-400">'orc'</span>:
+        <span class="text-cyan-400">print</span>(<span class="text-green-400">'The orc swings its massive club!'</span>)
+        health -= 15
+    <span class="text-slate-500"># Adding a new enemy requires modifying this function...</span>
+    <span class="text-purple-400">return</span> health
+
+player_health = 100
+player_health = <span class="text-cyan-400">handle_enemy_attack</span>(<span class="text-green-400">'dragon'</span>, player_health)
+<span class="text-cyan-400">print</span>(<span class="text-green-400">f'Player health: </span>{player_health}<span class="text-green-400">'</span>)</code></pre>
+                    </div>
+                </div>
+                <div>
+                    <div onclick="toggleCodeBlock('after-oop')" class="code-title-container cursor-pointer flex items-center justify-between mb-2 p-2 rounded-lg hover:bg-slate-800/50 transition-all duration-200">
+                        <h3 class="text-lg font-semibold text-green-400">With OOP</h3>
+                        <div class="flex items-center space-x-2 text-slate-400">
+                            <span id="after-oop-text" class="text-sm">Show Code</span>
+                            <svg id="after-oop-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="after-oop" class="code-block-container overflow-hidden" style="max-height: 0; opacity: 0;">
+                        <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python">
+<span class="text-slate-500"># Clean, modular, and extensible classes</span>
+<span class="text-purple-400">class</span> <span class="text-yellow-400">Enemy</span>:
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">attack</span>(<span class="text-orange-400">self</span>): <span class="text-purple-400">raise</span> <span class="text-red-400">NotImplementedError</span>
+
+<span class="text-purple-400">class</span> <span class="text-yellow-400">Goblin</span>(<span class="text-yellow-400">Enemy</span>):
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">attack</span>(<span class="text-orange-400">self</span>):
+        <span class="text-cyan-400">print</span>(<span class="text-green-400">'The goblin attacks with its rusty dagger!'</span>)
+        <span class="text-purple-400">return</span> 5
+
+<span class="text-purple-400">class</span> <span class="text-yellow-400">Dragon</span>(<span class="text-yellow-400">Enemy</span>):
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">attack</span>(<span class="text-orange-400">self</span>):
+        <span class="text-cyan-400">print</span>(<span class="text-green-400">'The dragon breathes a torrent of fire!'</span>)
+        <span class="text-purple-400">return</span> 25
+
+<span class="text-slate-500"># Easy to use and extend</span>
+player_health = 100
+enemies = [<span class="text-cyan-400">Goblin</span>(), <span class="text-cyan-400">Dragon</span>()]
+
+<span class="text-purple-400">for</span> enemy <span class="text-purple-400">in</span> enemies:
+    player_health -= enemy.<span class="text-cyan-400">attack</span>()
+
+<span class="text-cyan-400">print</span>(<span class="text-green-400">f'Player health: </span>{player_health}<span class="text-green-400">'</span>)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subtle Navigation Controls -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center space-x-8 z-10">
+            <!-- Prev button -->
+            <a href="tdd.html" class="text-slate-400 hover:text-white transition-colors" aria-label="Previous slide">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+            </a>
+            
+            <!-- Page dots -->
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to title page"></a>
+                <a href="dry.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to DRY slide"></a>
+                <a href="kiss.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to KISS slide"></a>
+                <a href="yagni.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to YAGNI slide"></a>
+                <a href="cicd.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to CI/CD slide"></a>
+                <a href="tdd.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to TDD slide"></a>
+                <a href="oop.html" class="block w-3 h-3 bg-white rounded-full" aria-label="Go to OOP slide" aria-current="page"></a>
+            </div>
+
+            <!-- Next button (loops back to start) -->
+            <a href="index.html" class="text-slate-400 hover:text-white transition-colors" aria-label="Next slide">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function toggleCodeBlock(blockId) {
+            const block = document.getElementById(blockId);
+            const textElement = document.getElementById(blockId + '-text');
+            const iconElement = document.getElementById(blockId + '-icon');
+            
+            if (block.style.maxHeight === '0px' || !block.style.maxHeight) {
+                block.style.maxHeight = block.scrollHeight + 'px';
+                block.style.opacity = '1';
+                textElement.textContent = 'Hide Code';
+                iconElement.style.transform = 'rotate(180deg)';
+            } else {
+                block.style.maxHeight = '0px';
+                block.style.opacity = '0';
+                textElement.textContent = 'Show Code';
+                iconElement.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
+
+</body>
+</html>

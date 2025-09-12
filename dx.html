@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DX</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="text-white min-h-screen">
+
+    <div class="relative min-h-screen w-full flex flex-col lg:flex-row overflow-hidden">
+        
+        <!-- Left Panel: Content -->
+        <div class="w-full lg:w-2/5 flex flex-col justify-center p-8 md:p-16">
+            <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-white">DX</h1>
+            <p class="text-2xl md:text-3xl text-slate-400 mt-1">Developer Experience</p>
+            <div class="w-24 h-1 bg-cyan-500 my-8"></div>
+            <p class="text-lg text-slate-300 max-w-md">
+                The overall experience and satisfaction a developer has when interacting with tools, APIs, documentation, and processes. Good DX makes development efficient, effective, and enjoyable.
+            </p>
+            <ul class="mt-8 space-y-5">
+                <li class="flex items-center space-x-4">
+                    <div class="flex-shrink-0 text-cyan-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                    <p class="text-slate-300"><strong>Increased Productivity:</strong> Reduces friction and cognitive load, letting developers focus on coding.</p>
+                </li>
+                <li class="flex items-center space-x-4">
+                     <div class="flex-shrink-0 text-yellow-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></div>
+                    <p class="text-slate-300"><strong>Better Onboarding:</strong> Clear documentation and simple setup get new developers up to speed faster.</p>
+                </li>
+                <li class="flex items-center space-x-4">
+                     <div class="flex-shrink-0 text-purple-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m8 17 4 4 4-4"/></svg></div>
+                    <p class="text-slate-300"><strong>Higher Retention:</strong> An enjoyable work environment helps attract and retain top talent.</p>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Right Panel: Comparisons -->
+        <div class="w-full lg:w-3/5 bg-slate-900/70 p-8 md:p-16 flex flex-col justify-center">
+            <div class="space-y-8">
+                <div>
+                    <div onclick="toggleCodeBlock('poor-dx')" class="code-title-container cursor-pointer flex items-center justify-between mb-2 p-2 rounded-lg hover:bg-slate-800/50 transition-all duration-200">
+                        <h3 class="text-lg font-semibold text-red-400">Poor Developer Experience</h3>
+                        <div class="flex items-center space-x-2 text-slate-400">
+                            <span id="poor-dx-text" class="text-sm">Show</span>
+                            <svg id="poor-dx-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="poor-dx" class="code-block-container overflow-hidden" style="max-height: 0; opacity: 0;">
+                        <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-text">
+<span class="text-purple-400">Onboarding:</span> <span class="text-slate-300">"Good luck! The setup script is broken and the docs are from 2018."</span>
+
+<span class="text-purple-400">Feedback Loop:</span> <span class="text-slate-300">CI builds take 45 minutes, so you context-switch while waiting.</span>
+
+<span class="text-purple-400">Documentation:</span> <span class="text-slate-300">Outdated, inaccurate, or non-existent. You read the source code to understand an API.</span>
+
+<span class="text-purple-400">Tooling:</span> <span class="text-slate-300">Inconsistent, slow, and requires manual workarounds for common tasks.</span>
+
+<span class="text-purple-400">Debugging:</span> <span class="text-slate-300">No clear error messages. You rely on `print` statements and guesswork.</span>
+</code></pre>
+                    </div>
+                </div>
+                <div>
+                    <div onclick="toggleCodeBlock('good-dx')" class="code-title-container cursor-pointer flex items-center justify-between mb-2 p-2 rounded-lg hover:bg-slate-800/50 transition-all duration-200">
+                        <h3 class="text-lg font-semibold text-green-400">Good Developer Experience</h3>
+                        <div class="flex items-center space-x-2 text-slate-400">
+                            <span id="good-dx-text" class="text-sm">Show</span>
+                            <svg id="good-dx-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="good-dx" class="code-block-container overflow-hidden" style="max-height: 0; opacity: 0;">
+                        <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-text">
+<span class="text-cyan-400">Onboarding:</span> <span class="text-slate-300">A single command gets you set up and running in minutes.</span>
+
+<span class="text-cyan-400">Feedback Loop:</span> <span class="text-slate-300">Fast, automated tests and previews run on every commit.</span>
+
+<span class="text-cyan-400">Documentation:</span> <span class="text-slate-300">Clear, searchable, and up-to-date with working examples you can copy.</span>
+
+<span class="text-cyan-400">Tooling:</span> <span class="text-slate-300">Integrated, fast, and automates repetitive tasks seamlessly.</span>
+
+<span class="text-cyan-400">Debugging:</span> <span class="text-slate-300">Descriptive error messages point you to the exact problem.</span>
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subtle Navigation Controls -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center space-x-8 z-10">
+            <!-- Prev button -->
+            <a href="mvp.html" class="text-slate-400 hover:text-white transition-colors" aria-label="Previous slide">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+            </a>
+            
+            <!-- Page dots -->
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to title page"></a>
+                <a href="dry.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to DRY slide"></a>
+                <a href="kiss.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to KISS slide"></a>
+                <a href="yagni.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to YAGNI slide"></a>
+                <a href="cicd.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to CI/CD slide"></a>
+                <a href="tdd.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to TDD slide"></a>
+                <a href="oop.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to OOP slide"></a>
+                <a href="solid-s.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to SRP slide"></a>
+                <a href="solid-o.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to OCP slide"></a>
+                <a href="solid-l.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to LSP slide"></a>
+                <a href="solid-i.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to ISP slide"></a>
+                <a href="solid-d.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to DIP slide"></a>
+                <a href="mvp.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to MVP slide"></a>
+                <a href="dx.html" class="block w-3 h-3 bg-white rounded-full" aria-label="Go to DX slide" aria-current="page"></a>
+            </div>
+
+            <!-- Next button (loops back to start) -->
+            <a href="index.html" class="text-slate-400 hover:text-white transition-colors" aria-label="Next slide">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function toggleCodeBlock(blockId) {
+            const block = document.getElementById(blockId);
+            const textElement = document.getElementById(blockId + '-text');
+            const iconElement = document.getElementById(blockId + '-icon');
+            
+            if (block.style.maxHeight === '0px' || !block.style.maxHeight) {
+                block.style.maxHeight = block.scrollHeight + 'px';
+                block.style.opacity = '1';
+                textElement.textContent = 'Hide';
+                iconElement.style.transform = 'rotate(180deg)';
+            } else {
+                block.style.maxHeight = '0px';
+                block.style.opacity = '0';
+                textElement.textContent = 'Show';
+                iconElement.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
+
+</body>
+</html>

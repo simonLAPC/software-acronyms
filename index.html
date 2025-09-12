@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Software Acronyms Presentation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRY Principle</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,15 +35,104 @@
 <script type="importmap">
 {
   "imports": {
+    "react": "https://aistudiocdn.com/react@^19.1.1",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
-    "react/": "https://aistudiocdn.com/react@^19.1.1/",
-    "react": "https://aistudiocdn.com/react@^19.1.1"
+    "react/": "https://aistudiocdn.com/react@^19.1.1/"
   }
 }
 </script>
 </head>
 <body class="text-white min-h-screen">
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+
+    <div class="relative min-h-screen w-full flex flex-col lg:flex-row overflow-hidden">
+        
+        <!-- Left Panel: Content -->
+        <div class="w-full lg:w-2/5 flex flex-col justify-center p-8 md:p-16">
+            <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-white">DRY</h1>
+            <p class="text-2xl md:text-3xl text-slate-400 mt-1">Don't Repeat Yourself</p>
+            <div class="w-24 h-1 bg-cyan-500 my-8"></div>
+            <p class="text-lg text-slate-300 max-w-md">
+                Every piece of code should have a single, authoritative representation within a system.
+            </p>
+            <ul class="mt-8 space-y-5">
+                <li class="flex items-center space-x-4">
+                    <div class="flex-shrink-0 text-cyan-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></div>
+                    <p class="text-slate-300">Change code in one place.</p>
+                </li>
+                <li class="flex items-center space-x-4">
+                     <div class="flex-shrink-0 text-purple-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="22" y1="12" x2="18" y2="12"></line><line x1="6" y1="12" x2="2" y2="12"></line><line x1="12" y1="6" x2="12" y2="2"></line><line x1="12" y1="22" x2="12" y2="18"></line></svg></div>
+                    <p class="text-slate-300">Prevents behavior drift.</p>
+                </li>
+                <li class="flex items-center space-x-4">
+                     <div class="flex-shrink-0 text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></div>
+                    <p class="text-slate-300">Improves readability.</p>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Right Panel: Code Snippets -->
+        <div class="w-full lg:w-3/5 bg-slate-900/70 p-8 md:p-16 flex flex-col justify-center">
+            <div class="space-y-8">
+                <!-- WET Example -->
+                <div>
+                    <h3 class="text-lg font-semibold text-red-400 mb-2">WET Approach (Repetitive)</h3>
+                    <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python"><span class="text-slate-500"># WET: Repetitive file writing logic</span>
+<span class="text-purple-400">import</span> json
+
+<span class="text-purple-400">def</span> <span class="text-cyan-400">save_user_as_json</span>(<span class="text-orange-400">user, filename</span>):
+    <span class="text-purple-400">with</span> <span class="text-cyan-400">open</span>(filename, <span class="text-green-400">'w'</span>) <span class="text-purple-400">as</span> f:
+        content = json.dumps(user, indent=2)
+        f.write(content)
+    <span class="text-cyan-400">print</span>(<span class="text-green-400">f"Saved {filename}!"</span>)
+
+<span class="text-purple-400">def</span> <span class="text-cyan-400">save_user_as_txt</span>(<span class="text-orange-400">user, filename</span>):
+    <span class="text-purple-400">with</span> <span class="text-cyan-400">open</span>(filename, <span class="text-green-400">'w'</span>) <span class="text-purple-400">as</span> f:
+        content = <span class="text-green-400">f"Name: {user['name']}\nEmail: {user['email']}"</span>
+        f.write(content)
+    <span class="text-cyan-400">print</span>(<span class="text-green-400">f"Saved {filename}!"</span>)</code></pre>
+                </div>
+                <!-- DRY Example -->
+                <div>
+                    <h3 class="text-lg font-semibold text-green-400 mb-2">DRY Approach (Reusable)</h3>
+                    <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python"><span class="text-slate-500"># DRY: Abstracted file writing logic</span>
+<span class="text-purple-400">import</span> json
+
+<span class="text-purple-400">def</span> <span class="text-cyan-400">save_to_file</span>(<span class="text-orange-400">content, filename</span>):
+    <span class="text-purple-400">with</span> <span class="text-cyan-400">open</span>(filename, <span class="text-green-400">'w'</span>) <span class="text-purple-400">as</span> f:
+        f.write(content)
+    <span class="text-cyan-400">print</span>(<span class="text-green-400">f"Saved {filename}!"</span>)
+
+<span class="text-purple-400">def</span> <span class="text-cyan-400">save_user_as_json</span>(<span class="text-orange-400">user, filename</span>):
+    content = json.dumps(user, indent=2)
+    <span class="text-cyan-400">save_to_file</span>(content, filename)
+
+<span class="text-purple-400">def</span> <span class="text-cyan-400">save_user_as_txt</span>(<span class="text-orange-400">user, filename</span>):
+    content = <span class="text-green-400">f"Name: {user['name']}\nEmail: {user['email']}"</span>
+    <span class="text-cyan-400">save_to_file</span>(content, filename)</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subtle Navigation Controls -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center space-x-8 z-10">
+            <!-- Prev button (disabled) -->
+            <span class="text-slate-700 cursor-not-allowed" aria-disabled="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+            </span>
+            
+            <!-- Page dots -->
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="block w-3 h-3 bg-white rounded-full" aria-label="Go to slide 1" aria-current="page"></a>
+                <a href="kiss.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to slide 2"></a>
+                <a href="yagni.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to slide 3"></a>
+            </div>
+
+            <!-- Next button -->
+            <a href="kiss.html" class="text-slate-400 hover:text-white transition-colors" aria-label="Next slide">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+            </a>
+        </div>
+    </div>
+
 </body>
 </html>

@@ -13,9 +13,8 @@
 
     <div class="relative min-h-screen w-full flex flex-col lg:flex-row overflow-hidden">
         
-        <!-- Left Panel: Content -->
         <div class="w-full lg:w-2/5 flex flex-col justify-center p-8 md:p-16">
-            <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-slate-700"><span class="text-slate-300">S</span>OLID</h1>
+            <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-slate-700"><span class="text-white">S</span>OLID</h1>
             <p class="text-2xl md:text-3xl text-slate-400 mt-1">Single Responsibility Principle</p>
             <div class="w-24 h-1 bg-cyan-500 my-8"></div>
             <p class="text-lg text-slate-300 max-w-md">
@@ -24,20 +23,19 @@
             <ul class="mt-8 space-y-5">
                 <li class="flex items-center space-x-4">
                     <div class="flex-shrink-0 text-cyan-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></div>
-                    <p class="text-slate-300"><strong>Easier Maintenance:</strong> Changes in one area are less likely to break another.</p>
+                    <p class="text-slate-300">Changes in one area are less likely to break another.</p>
                 </li>
                 <li class="flex items-center space-x-4">
                      <div class="flex-shrink-0 text-yellow-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></div>
-                    <p class="text-slate-300"><strong>Improved Reusability:</strong> Smaller, focused components are easier to reuse.</p>
+                    <p class="text-slate-300">Smaller, focused components are easier to reuse.</p>
                 </li>
                 <li class="flex items-center space-x-4">
                      <div class="flex-shrink-0 text-purple-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L8.6 3.3A2 2 0 0 0 6.9 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16z"></path></svg></div>
-                    <p class="text-slate-300"><strong>Better Testability:</strong> It's simpler to write unit tests for a single responsibility.</p>
+                    <p class="text-slate-300">Simpler to write unit tests for a single responsibility.</p>
                 </li>
             </ul>
         </div>
         
-        <!-- Right Panel: Comparisons -->
         <div class="w-full lg:w-3/5 bg-slate-900/70 p-8 md:p-16 flex flex-col justify-center">
             <div class="space-y-8">
                 <div>
@@ -52,15 +50,15 @@
                     </div>
                     <div id="before-srp" class="code-block-container overflow-hidden" style="max-height: 0; opacity: 0;">
                         <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python">
-<span class="text-slate-500"># This class has TWO responsibilities: user data and database logic.</span>
-<span class="text-purple-400">class</span> <span class="text-yellow-400">User</span>:
-    <span class="text-purple-400">def</span> <span class="text-cyan-400">__init__</span>(<span class="text-orange-400">self, name, email</span>):
-        <span class="text-orange-400">self</span>.name = name
-        <span class="text-orange-400">self</span>.email = email
-
-    <span class="text-purple-400">def</span> <span class="text-cyan-400">save_to_database</span>(<span class="text-orange-400">self</span>):
-        <span class="text-slate-500"># ... complex database connection and save logic ...</span>
-        <span class="text-cyan-400">print</span>(<span class="text-green-400">f'Saving </span>{<span class="text-orange-400">self</span>.name}<span class="text-green-400"> to the database...'</span>)
+<span class="text-slate-500"># This class has TWO responsibilities: finding nodes and deleting them.</span>
+<span class="text-purple-400">class</span> <span class="text-yellow-400">AnimationSceneCleaner</span>:
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">find_and_delete_rigs</span>(<span class="text-orange-400">self</span>):
+        <span class="text-slate-500"># Responsibility 1: Finding nodes based on a naming convention</span>
+        <span class="text-cyan-400">print</span>(<span class="text-green-400">"Finding all nodes ending with '_CTL'..."</span>)
+        nodes_to_delete = [<span class="text-green-400">'pCube1_CTL'</span>, <span class="text-green-400">'pSphere1_CTL'</span>]
+        
+        <span class="text-slate-500"># Responsibility 2: Deleting the found nodes</span>
+        <span class="text-cyan-400">print</span>(<span class="text-green-400">f'Deleting </span>{<span class="text-cyan-400">len</span>(nodes_to_delete)}<span class="text-green-400"> nodes...'</span>)
         <span class="text-purple-400">pass</span>
 </code></pre>
                     </div>
@@ -77,32 +75,36 @@
                     </div>
                     <div id="after-srp" class="code-block-container overflow-hidden" style="max-height: 0; opacity: 0;">
                         <pre class="code-block bg-slate-950/50 border border-slate-800 rounded-lg p-4 text-sm overflow-x-auto"><code class="language-python">
-<span class="text-slate-500"># Responsibility 1: User data</span>
-<span class="text-purple-400">class</span> <span class="text-yellow-400">User</span>:
-    <span class="text-purple-400">def</span> <span class="text-cyan-400">__init__</span>(<span class="text-orange-400">self, name, email</span>):
-        <span class="text-orange-400">self</span>.name = name
-        <span class="text-orange-400">self</span>.email = email
+<span class="text-slate-500"># Responsibility 1: Finding nodes in the scene.</span>
+<span class="text-purple-400">class</span> <span class="text-yellow-400">SceneFinder</span>:
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">find_by_suffix</span>(<span class="text-orange-400">self, suffix</span>):
+        <span class="text-cyan-400">print</span>(<span class="text-green-400">f"Finding all nodes ending with '</span>{suffix}<span class="text-green-400">'..."</span>)
+        nodes_found = [<span class="text-green-400">f'pCube1</span>{suffix}<span class="text-green-400">'</span>, <span class="text-green-400">f'pSphere1</span>{suffix}<span class="text-green-400">'</span>]
+        <span class="text-purple-400">return</span> nodes_found
 
-<span class="text-slate-500"># Responsibility 2: Database logic for a User</span>
-<span class="text-purple-400">class</span> <span class="text-yellow-400">UserRepository</span>:
-    <span class="text-purple-400">def</span> <span class="text-cyan-400">save</span>(<span class="text-orange-400">self, user</span>):
-        <span class="text-slate-500"># ... complex database connection and save logic ...</span>
-        <span class="text-cyan-400">print</span>(<span class="text-green-400">f'Saving </span>{user.name}<span class="text-green-400"> to the database...'</span>)
+<span class="text-slate-500"># Responsibility 2: Deleting a given list of nodes.</span>
+<span class="text-purple-400">class</span> <span class="text-yellow-400">NodeDeleter</span>:
+    <span class="text-purple-400">def</span> <span class="text-cyan-400">delete_nodes</span>(<span class="text-orange-400">self, nodes_list</span>):
+        <span class="text-cyan-400">print</span>(<span class="text-green-400">f"Deleting </span>{<span class="text-cyan-400">len</span>(nodes_list)}<span class="text-green-400"> nodes..."</span>)
         <span class="text-purple-400">pass</span>
+    
+<span class="text-slate-500"># How they work together:</span>
+finder = <span class="text-cyan-400">SceneFinder</span>()
+deleter = <span class="text-cyan-400">NodeDeleter</span>()
+
+animation_rigs = finder.<span class="text-cyan-400">find_by_suffix</span>(<span class="text-green-400">'_CTL'</span>)
+deleter.<span class="text-cyan-400">delete_nodes</span>(animation_rigs)
 </code></pre>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Subtle Navigation Controls -->
         <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center space-x-8 z-10">
-            <!-- Prev button -->
-            <a href="solid.html" class="text-slate-400 hover:text-white transition-colors" aria-label="Previous slide">
+            <a href="oop.html" class="text-slate-400 hover:text-white transition-colors" aria-label="Previous slide">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
             </a>
             
-            <!-- Page dots -->
             <div class="flex items-center space-x-4">
                 <a href="index.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to title page"></a>
                 <a href="dry.html" class="block w-3 h-3 bg-slate-600 hover:bg-slate-400 rounded-full transition-colors" aria-label="Go to DRY slide"></a>
@@ -114,7 +116,6 @@
                 <a href="solid-s.html" class="block w-3 h-3 bg-white rounded-full" aria-label="Go to SRP slide" aria-current="page"></a>
             </div>
 
-            <!-- Next button (loops back to start) -->
             <a href="solid-o.html" class="text-slate-400 hover:text-white transition-colors" aria-label="Next slide">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
             </a>
